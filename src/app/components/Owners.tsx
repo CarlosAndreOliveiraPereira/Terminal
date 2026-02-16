@@ -1,7 +1,5 @@
 import { Shield, Code, Terminal, Zap } from "lucide-react";
-import owner1 from "figma:asset/4a24cfb48dbe3315409300798348bb0b6af2a7a7.png";
-import owner2 from "figma:asset/c3450cccfe9fde1adaf6b8cb414376e4745aebb0.png";
-import owner3 from "figma:asset/b4e86e978f464fe8fe0f2fe9654a3e31d0421a32.png";
+import { OWNER_IMAGES } from "../utils/images";
 
 interface Owner {
   name: string;
@@ -13,23 +11,23 @@ interface Owner {
 
 const owners: Owner[] = [
   {
-    name: "Co-Founder",
+    name: "Fundador 1",
     role: "Chief Technology Officer",
-    image: owner1,
+    image: OWNER_IMAGES.owner1,
     specialty: "Backend & Security",
     icon: Shield,
   },
   {
-    name: "Co-Founder",
+    name: "Fundador 2",
     role: "Lead Developer",
-    image: owner2,
+    image: OWNER_IMAGES.owner2,
     specialty: "Full Stack Development",
     icon: Code,
   },
   {
-    name: "Co-Founder",
+    name: "Fundador 3",
     role: "Chief Executive Officer",
-    image: owner3,
+    image: OWNER_IMAGES.owner3,
     specialty: "Strategy & Innovation",
     icon: Terminal,
   },

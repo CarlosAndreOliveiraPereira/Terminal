@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "figma:asset/a2cf386f6867e3c2fdab342a3de11efe99903303.png";
+import { Logo } from "./Logo";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,7 +27,15 @@ export function Header() {
           className="flex items-center gap-4 group"
           onClick={() => setMobileMenuOpen(false)}
         >
-          
+          <Logo size={50} className="transition-transform duration-300 group-hover:scale-105" />
+          <div className="flex flex-col">
+            <span className="text-xl font-bold text-white group-hover:text-[#00E5FF] transition-colors duration-300">
+              Terminal 404
+            </span>
+            <span className="text-[10px] text-[#00E5FF] font-mono uppercase tracking-widest">
+              Cyberpunk Tech
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Menu */}

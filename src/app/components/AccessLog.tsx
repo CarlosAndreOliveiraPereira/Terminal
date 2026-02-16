@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import { Terminal, Send, Clock, User, ShieldCheck } from "lucide-react";
-import logo from "figma:asset/a2cf386f6867e3c2fdab342a3de11efe99903303.png";
+import { Logo } from "./Logo";
 
 // Mock data type until we connect Supabase
 interface LogEntry {
@@ -140,11 +140,12 @@ export function AccessLog() {
         >
           <div className="relative group">
             <div className="absolute inset-0 bg-[#00E5FF]/20 blur-[50px] rounded-full group-hover:bg-[#00E5FF]/30 transition-all duration-700" />
-            <img 
-              src={logo} 
-              alt="Terminal 404 Shield" 
-              className="relative w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.4)] hover:drop-shadow-[0_0_50px_rgba(0,229,255,0.6)] transition-all duration-500 transform hover:scale-105"
-            />
+            <div className="relative">
+              <Logo 
+                size={160}
+                className="drop-shadow-[0_0_30px_rgba(0,229,255,0.4)] hover:drop-shadow-[0_0_50px_rgba(0,229,255,0.6)] transition-all duration-500 transform hover:scale-105"
+              />
+            </div>
           </div>
         </motion.div>
 
