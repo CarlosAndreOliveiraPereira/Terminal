@@ -1,0 +1,49 @@
+# Terminal 404 Backend - Systemd Service File
+# Para uso em servidores Linux (Ubuntu, Debian, CentOS, etc.)
+#
+# Instalação:
+# 1. Copie este arquivo para /etc/systemd/system/terminal404-backend.service
+# 2. Edite os caminhos abaixo conforme necessário
+# 3. Execute: sudo systemctl daemon-reload
+# 4. Execute: sudo systemctl enable terminal404-backend
+# 5. Execute: sudo systemctl start terminal404-backend
+#
+# Comandos úteis:
+# - Status: sudo systemctl status terminal404-backend
+# - Iniciar: sudo systemctl start terminal404-backend
+# - Parar: sudo systemctl stop terminal404-backend
+# - Reiniciar: sudo systemctl restart terminal404-backend
+# - Logs: sudo journalctl -u terminal404-backend -f
+
+[Unit]
+Description=Terminal 404 Backend API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/terminal404/backend
+Environment="PATH=/var/www/terminal404/backend/venv/bin"
+ExecStart=/var/www/terminal404/backend/venv/bin/gunicorn \
+    --workers 4 \
+    --bind 0.0.0.0:5000 \
+    --timeout 30 \
+    --access-logfile /var/log/terminal404/access.log \
+    --error-logfile /var/log/terminal404/error.log \
+    --log-level info \
+    app:app
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Limits
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
