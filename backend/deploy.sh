@@ -131,7 +131,7 @@ case $REPLY in
         echo -e "${GREEN}✅ Using Gunicorn with 4 workers${NC}"
         echo ""
         gunicorn -w 4 \
-                 -b 0.0.0.0:5000 \
+                 -b 0.0.0.0:5001 \
                  --timeout 30 \
                  --access-logfile - \
                  --error-logfile - \
@@ -140,8 +140,8 @@ case $REPLY in
     3)
         echo -e "${CYAN}🚀 Starting in Production Mode (custom)...${NC}"
         read -p "Number of workers (recommended: 2-4): " workers
-        read -p "Port (default 5000): " port
-        port=${port:-5000}
+        read -p "Port (default 5001): " port
+        port=${port:-5001}
         echo ""
         echo -e "${GREEN}✅ Starting with $workers workers on port $port${NC}"
         echo ""

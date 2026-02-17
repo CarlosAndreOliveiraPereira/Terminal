@@ -19,7 +19,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://localhost:5001',
+        changeOrigin: true,
+      },
+      '/backend': {
+        target: 'http://localhost:8000', // PHP development server
         changeOrigin: true,
       },
     },

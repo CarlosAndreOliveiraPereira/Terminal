@@ -10,6 +10,11 @@ import logging
 import smtplib
 import secrets
 import hashlib
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
@@ -234,7 +239,7 @@ def send_secure_email(recipient: str, subject: str, body_html: str) -> bool:
     
     # Validate SMTP configuration
     if not SMTP_PASS:
-        app.logger.error("SMTP password not configured")
+        app.logger.warning("SMTP password not configured. Skipping email send. (Set SMTP_PASS environment variable)")
         return False
     
     try:
@@ -257,7 +262,7 @@ def send_secure_email(recipient: str, subject: str, body_html: str) -> bool:
         return True
         
     except smtplib.SMTPAuthenticationError:
-        app.logger.error("SMTP authentication failed")
+        app.logger.error("SMTP authentication failed. If using Gmail, ensure you are using an 'App Password', not your account password.")
         return False
     except smtplib.SMTPException as e:
         app.logger.error(f"SMTP error: {str(e)}")
@@ -555,10 +560,30 @@ def handle_exception(e):
 # ==================== APPLICATION ENTRY POINT ====================
 
 if __name__ == '__main__':
+    # Force port 5001 to resolve "Address already in use" on 5000
+    # and match vite.config.ts proxy settings
+    PORT = int(os.getenv('FLASK_PORT', 5001))
+    
+    # Check if port is available
+    import socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = sock.connect_ex(('127.0.0.1', PORT))
+    if result == 0:
+        print(f"\n\033[93m⚠️  WARNING: Port {PORT} is already in use!\033[0m")
+        print(f"\033[93m    Please kill the process using port {PORT} or check if another instance is running.\033[0m")
+        # Optional: Try next port
+        # PORT += 1
+        # print(f"\033[92m    Trying port {PORT}...\033[0m")
+    sock.close()
+
+    print(f"\n\033[96m🚀 Terminal 404 Backend Starting...\033[0m")
+    print(f"\033[96m👉 Server running on: http://0.0.0.0:{PORT}\033[0m")
+    print(f"\033[90m   (Press CTRL+C to quit)\033[0m\n")
+
     # Production configuration
     app.run(
         host=os.getenv('FLASK_HOST', '0.0.0.0'),
-        port=int(os.getenv('FLASK_PORT', 5000)),
+        port=PORT,
         debug=os.getenv('FLASK_DEBUG', 'False').lower() == 'true',
         threaded=True
     )

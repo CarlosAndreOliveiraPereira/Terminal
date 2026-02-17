@@ -11,25 +11,25 @@ interface Owner {
 
 const owners: Owner[] = [
   {
-    name: "Fundador 1",
-    role: "Chief Technology Officer",
+    name: "Griffith",
+    role: "Co-Fundador",
     image: OWNER_IMAGES.owner1,
-    specialty: "Backend & Security",
-    icon: Shield,
-  },
-  {
-    name: "Fundador 2",
-    role: "Lead Developer",
-    image: OWNER_IMAGES.owner2,
-    specialty: "Full Stack Development",
+    specialty: "Front-end Development",
     icon: Code,
   },
   {
-    name: "Fundador 3",
-    role: "Chief Executive Officer",
-    image: OWNER_IMAGES.owner3,
-    specialty: "Strategy & Innovation",
+    name: "Lauferistor",
+    role: "Co-Fundador",
+    image: OWNER_IMAGES.owner2,
+    specialty: "Front-end Development",
     icon: Terminal,
+  },
+  {
+    name: "Xuehe",
+    role: "Co-Fundador",
+    image: OWNER_IMAGES.owner3,
+    specialty: "Back-end & Infraestrutura",
+    icon: Shield,
   },
 ];
 

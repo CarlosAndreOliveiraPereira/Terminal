@@ -13,6 +13,7 @@ export function Header() {
     { label: "Sobre", href: "/about" },
     { label: "Serviços", href: "/services" },
     { label: "Comunidade", href: "/community" },
+    { label: "Registro", href: "/access-log" },
     { label: "Contato", href: "/contact" },
   ];
 
